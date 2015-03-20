@@ -17,46 +17,129 @@
 *   3) Move from one div to another
 *   4) Fade in sequentially, by taking in a class
 *   5) credits animation -> up, down
-*   6) 
 ----------------------------------*/
 
 $.fn.animania = function(value, options, callback) {
-    if(typeof(value)!="undefined") {
-        if(!value.isString) options = value;
-        if(options.length<1) callback = options;
-    }
-    else
-        value="float";
-
-    var settings = $.extend({
+    var this_ = $(this);
+    var settings = $.extend(true, {
+        animation: "float",
         duration: 400,
-        direction: "down",
+        transition: "entry",
+        float: {
+            offset:100,
+            direction: "down"
+        },
+        puff: {
+            offset:100,
+            direction: "in"
+        }
     }, options);
     
+    if(typeof(value)==="undefined")
+        value = options.animation || "float";
+    else {
+        if(typeof value !== "string") {
+            if(typeof value != "object") 
+                if(typeof value == "function") callback = value; 
+            if(typeof(options)!=="undefined" && options.length<1) callback = options;
+            options = value;
+            settings = $.extend(options);
+        }
+        else
+            if(typeof options !== "object")
+                callback = options;
+    }
+    
     var floatanim = function(options, callback) {
-        console.log("Floatanim called");
-        console.log(options.duration);
+        this_.show();
+        var pos;
+        var offsetpos;
+        var trans = 0;
+        
+        pos = this_.position();
+        
+        if(options.transition==="entry") trans = 0;
+        else if(options.transition==="exit") trans=1;
+        else trans=0;
+        
+        if(options.float.direction=="up") 
+            offsetpos= {top: pos.top+options.float.offset, left: pos.left};
+        if(options.float.direction=="down") 
+            offsetpos= {top: pos.top-options.float.offset, left: pos.left};
+        if(options.float.direction=="left")
+            offsetpos= {left: pos.left-options.float.offset, top: pos.top};
+        if(options.float.direction=="right") 
+            offsetpos= {left: pos.left+options.float.offset, top:pos.top};
+        
+        if(options.transition=="entry")
+            this_.css({top: offsetpos.top, left:offsetpos.left, opacity: trans});
+        if(options.transition=="exit")
+            this_.css({top: pos.top, left:pos.left, opacity: trans});
+        
+        if(trans===0) trans=1;
+        else trans=0;
+        
+        if(options.transition==="entry")
+            this_.animate({
+                top: pos.top,
+                left: pos.left,
+                opacity: trans
+            }, {
+                duration: options.duration,
+                complete: callback || null
+            }).show();
+        if(options.transition==="exit")
+            this_.animate({
+                top: offsetpos.top,
+                left: offsetpos.left,
+                opacity: trans,
+            }, {
+                duration: options.duration,
+                complete: callback || null
+            });
     };
     
     var puffanim = function(options, callback) {
-        console.log("Puffanim called");
-        console.log(options.duration);
-    }
+        var size={};
+        this_.show(); 
+        var offsize={};
+        var pos = this_.position();
+        size = {height: this_.outerHeight(true), width: this_.outerWidth(true)};
+        offsize = {height: size.height + options.puff.offset, width: size.width + options.puff.offset};
+        var animData = [
+            {width: size.width, height: size.height, top: pos.top, left: pos.left, opacity:1},
+            {width: offsize.width, height: offsize.height, top: pos.top-options.puff.offset, left: pos.top-options.puff.offset, opacity:0}
+        ];
+        if(options.puff.direction=="in") {
+            this_.css({width:offsize.width, height:offsize.height, top: pos.top - options.puff.offset, left: pos.left - options.puff.offset, opacity: 0});
+            this_.animate(animData[0], {
+                duration: options.duration,
+                complete: callback || null
+            }).show();
+        }
+        if(options.puff.direction=="out") {
+            this_.css({opacity: 1});
+            this_.animate({width: offsize.width, height: offsize.height, top: pos.top-options.puff.offset, left: pos.top-options.puff.offset, opacity:0}, {
+                duration: options.duration,
+                complete: callback || null
+            }).show();
+        }
+    };
     
     var moveanim = function(options, callback) {
         console.log("Moveanim called");
         console.log(options.duration);
-    }
+    };
     
     var fadeanim = function(options, callback) {
         console.log("Fadeanim called");
         console.log(options.duration);
-    }
+    };
     
     var creditsanim = function(options, callback){
         console.log("Creditsanim called");
         console.log(options.duration);
-    }
+    };
     
     switch(value) {
             case "float":
@@ -80,7 +163,7 @@ $.fn.animania = function(value, options, callback) {
                 break;
             
             default:
-                floatanim(settings,callback);
+                alert("Animation '" + value + "' is not available.");
                 break;
     }
 };

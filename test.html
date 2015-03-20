@@ -2,9 +2,38 @@
 <body>
     <script type="text/javascript" src="jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="animania.js"></script>
-    
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <img id="foo" style="position: absolute;top:20%;left:30%; background:red" src="http://images5.fanpop.com/image/photos/26000000/colorful-random-26058807-500-364.jpg" />
     <script>
-        $('body').animania();
+        $("#foo").hide();
+        function xyz() {
+//            $('#foo').animania("float");
+//            $('#foo').animania({duration:2000});
+//            $('#foo').animania(function(){ alert("Hi!"); });
+//            $('#foo').animania("float", {duration:2000});
+//            $('#foo').animania("float", function(){ alert("Hi!"); });
+//            $('#foo').animania({duration:2000}, function(){ alert("Hi!"); });
+            $('#foo').animania("float",
+                {
+                    duration:2000,
+                    transition: "entry",
+                    float: {
+                        offset:100,
+                        direction: "up",  
+                    }
+                }, function() {
+                    $(this).animania("float", {
+                        duration:2000,
+                        transition: "exit",
+                        float: {
+                            offset:100,
+                            direction: "right"
+                        }
+                    });
+                });
+        }
     </script>
+    <br />
+    <a href="#" onclick="xyz()">Animania start!</a>
 </body>
 </html>
