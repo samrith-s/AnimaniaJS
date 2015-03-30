@@ -12,11 +12,11 @@
 * Built for: jQuery
 * Website: http://animatron
 * Functions offered:
-*   1) Float -> left, right, up, down               --> DONE
-*   2) Puff-> in, out                               --> DONE
-*   3) Move from one div to another                 --> IN PROGRESS
-*   4) Fade in sequentially, by taking in a class
-*   5) credits animation -> up, down
+*   1) Float -> left, right, up, down               --> DONE................................... [✓]
+*   2) Puff-> in, out                               --> DONE................................... [✓]
+*   3) Move from one div to another                 --> STALLED UNTIL FURTHER NOTICE........... [x]
+*   4) Fade in sequentially, by taking in a class   --> STALLED UNTIL NEXT VERSION............. [?]
+*   5) credits animation -> up, down                --> DONE................................... [✓]
 ----------------------------------*/
 
 $.fn.animania = function(value, options, callback) {
