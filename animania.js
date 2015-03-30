@@ -35,8 +35,8 @@ $.fn.animania = function(value, options, callback) {
         }
     }, options);
     
-    if(typeof(value)==="undefined")
-        value = options.animation || "float";
+    if(typeof(value)==="undefined") 
+        value = settings.animation;
     else {
         if(typeof value !== "string") {
             if(typeof value != "object") 
@@ -54,7 +54,7 @@ $.fn.animania = function(value, options, callback) {
      *     FLOAT ANIMATION
     ---------------------------*/
     var floatanim = function(options, callback) {
-//        this_.show();
+        this_.show();
         var pos;
         var offsetpos;
         var trans = 0;
@@ -65,7 +65,6 @@ $.fn.animania = function(value, options, callback) {
         else trans=0;
         
         if(options.transition=="entry") {
-            this_.css({top: offsetpos.top, left:offsetpos.left, opacity: trans});
             if(options.float.direction=="up") 
                 offsetpos= {top: pos.top+options.float.offset, left: pos.left};
             if(options.float.direction=="down") 
@@ -74,9 +73,9 @@ $.fn.animania = function(value, options, callback) {
                 offsetpos= {left: pos.left-options.float.offset, top: pos.top};
             if(options.float.direction=="right") 
                 offsetpos= {left: pos.left+options.float.offset, top:pos.top};
+            this_.css({top: offsetpos.top, left:offsetpos.left, opacity: trans});
         }   
         if(options.transition=="exit") {
-            this_.css({top: pos.top, left:pos.left, opacity: trans});
             if(options.float.direction=="up") 
                 offsetpos= {top: pos.top-options.float.offset, left: pos.left};
             if(options.float.direction=="down") 
@@ -85,6 +84,7 @@ $.fn.animania = function(value, options, callback) {
                 offsetpos= {left: pos.left+options.float.offset, top: pos.top};
             if(options.float.direction=="right") 
                 offsetpos= {left: pos.left-options.float.offset, top:pos.top};
+            this_.css({top: pos.top, left:pos.left, opacity: trans});
         }
         
         if(trans===0) trans=1;
@@ -107,7 +107,6 @@ $.fn.animania = function(value, options, callback) {
             }, {
                 duration: options.duration,
                 complete: function() {
-                    console.log(callback);
                     $(this).css({top: pos.top, left: pos.left});
                     if(typeof callback!=="undefined")
                         callback.call();
