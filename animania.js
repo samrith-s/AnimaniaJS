@@ -14,7 +14,7 @@
 * Functions offered:
 *   1) Float -> left, right, up, down               --> DONE................................... [✓]
 *   2) Puff-> in, out                               --> DONE................................... [✓]
-*   3) Move from one div to another                 --> STALLED UNTIL FURTHER NOTICE........... [x]
+*   3) Move from one div to another                 --> STALLED UNFORSEEABLY................... [x]
 *   4) Fade in sequentially, by taking in a class   --> STALLED UNTIL NEXT VERSION............. [?]
 *   5) credits animation -> up, down                --> DONE................................... [✓]
 ----------------------------------*/
