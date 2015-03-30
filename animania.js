@@ -32,6 +32,11 @@ $.fn.animania = function(value, options, callback) {
         puff: {
             offset:100,
             direction: "in"
+        },
+        credits: {
+            offset:100,
+            direction: "up",
+            hoverStop: true
         }
     }, options);
     
@@ -117,7 +122,6 @@ $.fn.animania = function(value, options, callback) {
     /*--------------------------
      *     PUFF ANIMATION
     ---------------------------*/
-    
     var puffanim = function(options, callback) {
         var size={};
         this_.show(); 
@@ -150,14 +154,91 @@ $.fn.animania = function(value, options, callback) {
         }
     };
     
+    /*--------------------------
+     *     FADE ANIMATION
+    ---------------------------*/
     var fadeanim = function(options, callback) {
         console.log("Fadeanim called");
         console.log(options.duration);
     };
     
+    /*--------------------------
+     *     CREDITS ANIMATION
+    ---------------------------*/
     var creditsanim = function(options, callback){
-        console.log("Creditsanim called");
-        console.log(options.duration);
+        var size={};
+        var animFunct;
+        var pos = this_.position();
+        this_.show();
+        this_.wrapAll('<div class="animania-credits-handler"></div>');
+        var handler_ = $(".animania-credits-handler");
+        handler_.parent().css({overflow: "hidden"});
+        var handler_parent = {
+            height: handler_.parent().height(), 
+            width: handler_.parent().width(),
+            padding: 0,
+            margin: 0,
+            top: 0,
+            left: 0,
+            textAlign: "center",
+            overflow: "hidden",
+            position: "relative",
+        };
+        console.log(handler_parent); 
+        
+        handler_.css(handler_parent);
+        if(options.credits.direction=="up") {
+            this_.css({
+                top: handler_.height() + options.credits.offset
+            });
+            animFunct = function() {
+                this_.animate({
+                    top: (handler_.height()*0) - (this_.height() + options.credits.offset)
+                },
+                {
+                    duration: options.duration,
+                    complete: function() {
+                        $(this).css({top: pos.top}).hide().unwrap().hide();
+                        handler_.parent().css({overflow: "auto"});
+                        if(typeof callback!=="undefined")
+                            callback.call();
+                    }
+                }).show();
+            }
+            animFunct.call();
+        }
+        if(options.credits.direction=="down") {
+            this_.css({
+                top: pos.top - (pos.top+this_.height()+options.credits.offset)
+            });
+            animFunct = function() {
+                this_.animate({
+                    top: pos.top + handler_.height() + options.credits.offset,
+                },
+                {
+                    duration: options.duration,
+                    complete: function() {
+                        $(this).css({top: pos.top}).hide().unwrap().hide();
+                        handler_.parent().css({overflow: "auto"});
+                        if(typeof callback!=="undefined")
+                            callback.call();
+                    }
+                }).show(); 
+            }
+            animFunct.call();
+        }
+            
+        if(options.credits.hoverStop) {
+            $(this_).unbind('mouseenter').on('mouseenter', function() {
+                $(this_).stop();
+            });
+            $(this_).unbind('mouseleave').on('mouseleave', animFunct);
+        }
+        
+                
+        console.log(handler_parent);
+        handler_.css(handler_parent);
+        console.log(handler_.parent());
     };
     
     switch(value) {
