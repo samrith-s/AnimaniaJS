@@ -5,7 +5,7 @@
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
     <img id="foo" style="position: absolute;top:20%;left:30%; background:red" src="http://images5.fanpop.com/image/photos/26000000/colorful-random-26058807-500-364.jpg" />
     <script>
-        $("#foo").hide();
+//        $("#foo").hide();
         function xyz() {
 //            $('#foo').animania("float");
 //            $('#foo').animania({duration:2000});
@@ -13,24 +13,24 @@
 //            $('#foo').animania("float", {duration:2000});
 //            $('#foo').animania("float", function(){ alert("Hi!"); });
 //            $('#foo').animania({duration:2000}, function(){ alert("Hi!"); });
-            $('#foo').animania("float",
+            $('#foo').animania("puff",
                 {
-                    duration:2000,
+                    duration:1000,
                     transition: "entry",
-                    float: {
-                        offset:100,
-                        direction: "up",  
+                    puff: {
+                        offset:300,
                     }
                 }, function() {
-                    $(this).animania("float", {
-                        duration:2000,
-                        transition: "exit",
-                        float: {
-                            offset:100,
-                            direction: "right"
-                        }
-                    });
-                });
+                    $(this).animania("float",
+                        {
+                            duration:1000,
+                            transition: "exit",
+                            float: {
+                                offset:300,
+                                direction: "up"
+                            }
+                        });
+            });
         }
     </script>
     <br />

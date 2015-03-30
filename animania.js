@@ -12,9 +12,9 @@
 * Built for: jQuery
 * Website: http://animatron
 * Functions offered:
-*   1) Float -> left, right, up, down
-*   2) Puff-> in, out
-*   3) Move from one div to another
+*   1) Float -> left, right, up, down               --> DONE
+*   2) Puff-> in, out                               --> DONE
+*   3) Move from one div to another                 --> IN PROGRESS
 *   4) Fade in sequentially, by taking in a class
 *   5) credits animation -> up, down
 ----------------------------------*/
@@ -50,31 +50,42 @@ $.fn.animania = function(value, options, callback) {
                 callback = options;
     }
     
+    /*--------------------------
+     *     FLOAT ANIMATION
+    ---------------------------*/
     var floatanim = function(options, callback) {
-        this_.show();
+//        this_.show();
         var pos;
         var offsetpos;
         var trans = 0;
-        
         pos = this_.position();
         
         if(options.transition==="entry") trans = 0;
         else if(options.transition==="exit") trans=1;
         else trans=0;
         
-        if(options.float.direction=="up") 
-            offsetpos= {top: pos.top+options.float.offset, left: pos.left};
-        if(options.float.direction=="down") 
-            offsetpos= {top: pos.top-options.float.offset, left: pos.left};
-        if(options.float.direction=="left")
-            offsetpos= {left: pos.left-options.float.offset, top: pos.top};
-        if(options.float.direction=="right") 
-            offsetpos= {left: pos.left+options.float.offset, top:pos.top};
-        
-        if(options.transition=="entry")
+        if(options.transition=="entry") {
             this_.css({top: offsetpos.top, left:offsetpos.left, opacity: trans});
-        if(options.transition=="exit")
+            if(options.float.direction=="up") 
+                offsetpos= {top: pos.top+options.float.offset, left: pos.left};
+            if(options.float.direction=="down") 
+                offsetpos= {top: pos.top-options.float.offset, left: pos.left};
+            if(options.float.direction=="left")
+                offsetpos= {left: pos.left-options.float.offset, top: pos.top};
+            if(options.float.direction=="right") 
+                offsetpos= {left: pos.left+options.float.offset, top:pos.top};
+        }   
+        if(options.transition=="exit") {
             this_.css({top: pos.top, left:pos.left, opacity: trans});
+            if(options.float.direction=="up") 
+                offsetpos= {top: pos.top-options.float.offset, left: pos.left};
+            if(options.float.direction=="down") 
+                offsetpos= {top: pos.top+options.float.offset, left: pos.left};
+            if(options.float.direction=="left")
+                offsetpos= {left: pos.left+options.float.offset, top: pos.top};
+            if(options.float.direction=="right") 
+                offsetpos= {left: pos.left-options.float.offset, top:pos.top};
+        }
         
         if(trans===0) trans=1;
         else trans=0;
@@ -95,9 +106,18 @@ $.fn.animania = function(value, options, callback) {
                 opacity: trans,
             }, {
                 duration: options.duration,
-                complete: callback || null
-            });
+                complete: function() {
+                    console.log(callback);
+                    $(this).css({top: pos.top, left: pos.left});
+                    if(typeof callback!=="undefined")
+                        callback.call();
+                }
+            }).fadeOut(0);
     };
+    
+    /*--------------------------
+     *     PUFF ANIMATION
+    ---------------------------*/
     
     var puffanim = function(options, callback) {
         var size={};
@@ -110,25 +130,25 @@ $.fn.animania = function(value, options, callback) {
             {width: size.width, height: size.height, top: pos.top, left: pos.left, opacity:1},
             {width: offsize.width, height: offsize.height, top: pos.top-options.puff.offset, left: pos.top-options.puff.offset, opacity:0}
         ];
-        if(options.puff.direction=="in") {
-            this_.css({width:offsize.width, height:offsize.height, top: pos.top - options.puff.offset, left: pos.left - options.puff.offset, opacity: 0});
-            this_.animate(animData[0], {
+        console.log(animData[0]);
+        if(options.transition=="entry") {
+            this_.css({width:offsize.width, height:offsize.height, top: pos.top - (options.puff.offset/2), left: pos.left - (options.puff.offset/2), opacity: 0});
+            this_.animate({width: size.width, height: size.height, top: pos.top, left: pos.left, opacity:1}, {
                 duration: options.duration,
                 complete: callback || null
             }).show();
         }
-        if(options.puff.direction=="out") {
+        if(options.transition=="exit") {
             this_.css({opacity: 1});
-            this_.animate({width: offsize.width, height: offsize.height, top: pos.top-options.puff.offset, left: pos.top-options.puff.offset, opacity:0}, {
+            this_.animate({width: offsize.width, height: offsize.height, top: pos.top-(options.puff.offset/2), left: pos.left-(options.puff.offset/2), opacity:0}, {
                 duration: options.duration,
-                complete: callback || null
+                complete: function() {
+                    $(this).css(animData[0]);
+                    if(typeof callback!=="undefined")
+                        callback.call();
+                }
             }).show();
         }
-    };
-    
-    var moveanim = function(options, callback) {
-        console.log("Moveanim called");
-        console.log(options.duration);
     };
     
     var fadeanim = function(options, callback) {
@@ -163,7 +183,7 @@ $.fn.animania = function(value, options, callback) {
                 break;
             
             default:
-                alert("Animation '" + value + "' is not available.");
+                alert("AnimaniaJS: '" + value + "' animation is not available.");
                 break;
     }
 };
