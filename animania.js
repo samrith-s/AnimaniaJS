@@ -200,6 +200,7 @@ $.fn.animania = function(value, options, callback) {
                     complete: function() {
                         $(this).css({top: pos.top}).hide().unwrap().hide();
                         handler_.parent().css({overflow: "auto"});
+                        $(this_).unbind('mouseenter').unbind('mouseleave');
                         if(typeof callback!=="undefined")
                             callback.call();
                     }
@@ -220,6 +221,7 @@ $.fn.animania = function(value, options, callback) {
                     complete: function() {
                         $(this).css({top: pos.top}).hide().unwrap().hide();
                         handler_.parent().css({overflow: "auto"});
+                        $(this_).unbind('mouseenter').unbind('mouseleave');
                         if(typeof callback!=="undefined")
                             callback.call();
                     }
