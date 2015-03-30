@@ -6,7 +6,7 @@
 <!--        <img id="foo" style="position: absolute;top:20%;left:30%; background:red" src="http://images5.fanpop.com/image/photos/26000000/colorful-random-26058807-500-364.jpg" />-->
 <!--    </div>-->
     
-    <div id='bar' style='width:100%; height:auto; position: absolute; top: 0; left: 0; text-align: center'>
+    <div id='bar' style='width:100%; height:50%; overflow:hidden; position: absolute; top: 0; left: 0; text-align: center'>
         <p>Director<br />That is me!</p>
         <p>Director<br />That is me!</p>
         <p>Director<br />That is me!</p>
@@ -47,7 +47,16 @@
                     offset:30,
                     direction: "up"
                 }
-            }).fadeIn(300);
+            }, function() {
+                $(this).css({background: "red"});
+                $(this).animania("puff", {
+                    duration: 1000,
+                    transition: "entry",
+                    puff: {
+                        offset:300
+                    }
+                });
+            });
         }
     </script>
     <br />

@@ -21,7 +21,7 @@
 
 (function( $ ) {
         $.fn.animania = function(value, options, callback) {
-            var this_ = $(this);
+            var this_ = this;
             var settings = $.extend(true, {
                 animation: "float",
                 duration: 400,
@@ -114,8 +114,11 @@
                         duration: options.duration,
                         complete: function() {
                             $(this).css({top: pos.top, left: pos.left});
-                            if(typeof callback!=="undefined")
-                                callback.call();
+                            if(typeof callback!=="undefined") {
+                                var cbFunct = callback;
+                                cbFunct.call(this);
+                            }
+                                
                         }
                     }).fadeOut(0);
             };
@@ -147,8 +150,10 @@
                         duration: options.duration,
                         complete: function() {
                             $(this).css(animData[0]);
-                            if(typeof callback!=="undefined")
-                                callback.call();
+                            if(typeof callback!=="undefined") {
+                                var cbFunct = callback;
+                                cbFunct.call(this);
+                            }
                         }
                     }).show();
                 }
@@ -180,7 +185,7 @@
                     margin: 0,
                     top: 0,
                     left: 0,
-                    textAlign: "center",
+//                    textAlign: "center",
                     overflow: "hidden",
                     position: "relative",
                 };
@@ -200,11 +205,14 @@
                                 $(this).css({top: pos.top}).hide().unwrap().hide();
                                 handler_.parent().css({overflow: "auto"});
                                 $(this_).unbind('mouseenter').unbind('mouseleave');
-                                if(typeof callback!=="undefined")
-                                    callback.call();
+                                if(typeof callback!=="undefined") {
+                                    var cbFunct = callback;
+                                    cbFunct.call(this);
+                                }
                             }
                         }).show();
-                    }
+                    };
+                    
                     animFunct.call();
                 }
                 if(options.credits.direction=="down") {
@@ -225,14 +233,12 @@
                                     callback.call();
                             }
                         }).show(); 
-                    }
+                    };
                     animFunct.call();
                 }
 
                 if(options.credits.hoverStop) {
-                    $(this_).unbind('mouseenter').on('mouseenter', function() {
-                        $(this_).stop();
-                    });
+                    $(this_).unbind('mouseenter').on('mouseenter', function(){$(this_).stop();});
                     $(this_).unbind('mouseleave').on('mouseleave', animFunct);
                 }
 
@@ -264,6 +270,8 @@
                         alert("AnimaniaJS: '" + value + "' animation is not available.");
                         break;
             }
-            return this_;
+            
+            console.log(this_);
+            return this;
         };
 }(jQuery));
