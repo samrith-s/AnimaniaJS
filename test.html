@@ -2,10 +2,10 @@
 <body>
     <script type="text/javascript" src="jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="animania.js"></script>
-<!--    <div style="width:100%; height:30%; background:red; position:absolute;">-->
-<!--        <img id="foo" style="position: absolute;top:20%;left:30%; background:red" src="http://images5.fanpop.com/image/photos/26000000/colorful-random-26058807-500-364.jpg" />-->
-<!--    </div>-->
+        
+    <img id="foo" style="position: absolute;top:20%;left:30%; background:red" src="http://images5.fanpop.com/image/photos/26000000/colorful-random-26058807-500-364.jpg" />
     
+<!--
     <div id='bar' style='width:100%; height:50%; overflow:hidden; position: absolute; top: 0; left: 0; text-align: center'>
         <p>Director<br />That is me!</p>
         <p>Director<br />That is me!</p>
@@ -22,6 +22,7 @@
         <p>Director<br />That is me!</p>
         <p>Director<br />That is me!</p>
     </div>
+-->
     <script>
 //        $("#foo").hide();
         function xyz() {
@@ -32,31 +33,31 @@
 //            $('#foo').animania("float", function(){ alert("Hi!"); });
 //            $('#foo').animania({duration:2000}, function(){ alert("Hi!"); });
             
-//            $('#foo').animania("float", {
-//                duration: 2000,
-//                transition: "entry",
-//                float: {
-//                    direction: "up",
-//                    offset: 300,
-//                }
-//            });
-            
-            $('#bar').animania("credits", {
-                duration:10000,
-                credits: {
-                    offset:30,
-                    direction: "up"
+            $('#foo').animania("credits", {
+                duration: 2000,
+                transition: "entry",
+                puff: {
+                    direction: "in",
+                    offset: 300,
                 }
-            }, function() {
-                $(this).css({background: "red"});
-                $(this).animania("puff", {
-                    duration: 1000,
-                    transition: "entry",
-                    puff: {
-                        offset:300
-                    }
-                });
             });
+            
+//            $('#bar').animania("credits", {
+//                duration:10000,
+//                credits: {
+//                    offset:30,
+//                    direction: "up"
+//                }
+//            }, function() {
+//                $(this).css({background: "red"});
+//                $(this).animania("puff", {
+//                    duration: 1000,
+//                    transition: "entry",
+//                    puff: {
+//                        offset:300
+//                    }
+//                });
+//            });
         }
     </script>
     <br />

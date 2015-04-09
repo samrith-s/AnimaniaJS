@@ -103,7 +103,12 @@
                         opacity: trans
                     }, {
                         duration: options.duration,
-                        complete: callback || null
+                        complete: function() {
+                            if(typeof callback!=="undefined") {
+                                var cbFunct = callback;
+                                cbFunct.call(this);
+                            }
+                        }
                     }).show();
                 if(options.transition==="exit")
                     this_.animate({
@@ -141,7 +146,12 @@
                     this_.css({width:offsize.width, height:offsize.height, top: pos.top - (options.puff.offset/2), left: pos.left - (options.puff.offset/2), opacity: 0});
                     this_.animate({width: size.width, height: size.height, top: pos.top, left: pos.left, opacity:1}, {
                         duration: options.duration,
-                        complete: callback || null
+                        complete: function() {
+                            if(typeof callback!=="undefined") {
+                                var cbFunct = callback;
+                                cbFunct.call(this);
+                            }
+                        }
                     }).show();
                 }
                 if(options.transition=="exit") {
@@ -185,7 +195,6 @@
                     margin: 0,
                     top: 0,
                     left: 0,
-//                    textAlign: "center",
                     overflow: "hidden",
                     position: "relative",
                 };
@@ -229,8 +238,10 @@
                                 $(this).css({top: pos.top}).hide().unwrap().hide();
                                 handler_.parent().css({overflow: "auto"});
                                 $(this_).unbind('mouseenter').unbind('mouseleave');
-                                if(typeof callback!=="undefined")
-                                    callback.call();
+                                if(typeof callback!=="undefined") {
+                                    var cbFunct = callback;
+                                    cbFunct.call(this);
+                                }
                             }
                         }).show(); 
                     };
@@ -254,13 +265,13 @@
                         puffanim(settings, callback);
                         break;
 
-                    case "move":
-                        moveanim(settings,callback);
-                        break;
-
-                    case "fade":
-                        fadeanim(settings,callback);
-                        break;
+//                    case "move":
+//                        moveanim(settings,callback);
+//                        break;
+//
+//                    case "fade":
+//                        fadeanim(settings,callback);
+//                        break;
 
                     case "credits":
                         creditsanim(settings,callback);
@@ -271,7 +282,6 @@
                         break;
             }
             
-            console.log(this_);
             return this;
         };
 }(jQuery));
