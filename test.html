@@ -1,7 +1,7 @@
 <html>
 <body>
     <script type="text/javascript" src="jquery-1.11.2.min.js"></script>
-    <script type="text/javascript" src="animania.js"></script>
+    <script type="text/javascript" src="animania-1.0.1.js"></script>
         
     <img id="foo" style="position: absolute;top:20%;left:30%; background:red" src="http://images5.fanpop.com/image/photos/26000000/colorful-random-26058807-500-364.jpg" />
     
@@ -33,20 +33,20 @@
 //            $('#foo').animania("float", function(){ alert("Hi!"); });
 //            $('#foo').animania({duration:2000}, function(){ alert("Hi!"); });
             
-            $('#foo').animania("credits", {
-                duration: 20000,
-                credits: {
-                    direction: "up",
+            $('#foo').animania("puff", {
+                duration: 2000,
+				transition: "exit",
+                puff: {
                     offset: 300,
                 }
             }, function() {
-				$(this).animania("puff", {
-					duration: 2000,
-					transition: "entry",
-					puff: {
-						offset:200
-					}
-				})
+//				$(this).animania("puff", {
+//					duration: 2000,
+//					transition: "entry",
+//					puff: {
+//						offset:200
+//					}
+//				})
 			});
             
 //            $('#bar').animania("credits", {
