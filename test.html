@@ -34,13 +34,20 @@
 //            $('#foo').animania({duration:2000}, function(){ alert("Hi!"); });
             
             $('#foo').animania("credits", {
-                duration: 2000,
-                transition: "entry",
-                puff: {
-                    direction: "in",
+                duration: 20000,
+                credits: {
+                    direction: "up",
                     offset: 300,
                 }
-            });
+            }, function() {
+				$(this).animania("puff", {
+					duration: 2000,
+					transition: "entry",
+					puff: {
+						offset:200
+					}
+				})
+			});
             
 //            $('#bar').animania("credits", {
 //                duration:10000,
