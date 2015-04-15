@@ -160,6 +160,7 @@
                         duration: options.duration,
                         complete: function() {
                             $(this).css(animData[0]);
+							$(this).hide();
                             if(typeof callback!=="undefined") {
                                 var cbFunct = callback;
                                 cbFunct.call(this);
