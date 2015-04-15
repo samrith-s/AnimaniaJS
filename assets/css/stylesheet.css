@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: 'BebasNeue';
-  src: url('/assets/fonts/BebasNeue.otf');
+  src: url('assets/fonts/BebasNeue.otf');
 }
 
 body {
@@ -19,7 +19,7 @@ body {
 
 .sidebar {
 	height: 100vh;
-	background: url('/assets/img/sidebar/background.png') repeat;
+	background: url('assets/img/sidebar/background.png') repeat;
 	box-shadow: 2px 0px 5px #000;
 	color: #fff;
 }
