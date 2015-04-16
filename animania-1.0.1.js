@@ -7,7 +7,7 @@
 *  /_/   |_| |_|  \_| |_| /_/        |_| /_/   |_| |_|  \_| |_| /_/   |_| 
 *
 * Author: Samrith Shankar
-* Version: 1.0.0
+* Version: 1.0.1
 * Created at: 18th March, 2015
 * Built for: jQuery
 * Website: http://animatron
