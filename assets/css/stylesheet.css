@@ -69,6 +69,14 @@ li.L5, li.L6, li.L7, li.L8
 	box-shadow:inset 0px 0px 0.3em #111;
 }
 
+.bolt {
+	color: #fff;
+}
+
+#logo:hover .bolt {
+	color: yellow;
+}
+
 .menu-items ul {
 	padding: 0;
 	margin: 0;

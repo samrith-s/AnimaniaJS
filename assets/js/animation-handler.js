@@ -71,9 +71,11 @@ function globalObservers() {
 		$("#puffanim").offset().top,
 		$("#floatanim").offset().top,
 		$("#creditsanim").offset().top
-	]
+	];
 	
-	console.log(topPos);
+	$("#logo").unbind('click').on('click', function() {
+		location.reload()
+	});
 	
 	$("#welcome_").unbind('click').on('click', function() {
 		$(".main-wrapper").animate({
