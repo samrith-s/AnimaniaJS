@@ -86,7 +86,7 @@ function globalObservers() {
 	});
 	
 	$("#download").unbind('click').on('click', function() {
-		$("iFrame.no-show").load('https://github.com/samrith-s/AnimaniaJS/archive/v1.0.1.zip');
+		$("iFrame.no-show").attr("src",'https://github.com/samrith-s/AnimaniaJS/archive/v1.0.1.zip');
 	});
 	
 	$("welcome_").unbind('click').on('click', function() {
