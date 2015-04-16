@@ -77,7 +77,19 @@ function globalObservers() {
 		location.reload()
 	});
 	
-	$("#welcome_").unbind('click').on('click', function() {
+	$("#github").unbind('click').on('click', function() {
+		var win = window.open('https://github.com/samrith-s/AnimaniaJS', '_blank');
+		if(win)
+			win.focus();
+		else
+			alert('Please allow popups for this site');
+	});
+	
+	$("#download").unbind('click').on('click', function() {
+		$("iFrame.no-show").load('https://github.com/samrith-s/AnimaniaJS/archive/v1.0.1.zip');
+	});
+	
+	$("welcome_").unbind('click').on('click', function() {
 		$(".main-wrapper").animate({
 			scrollTop: topPos[0]
 		}, 650);

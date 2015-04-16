@@ -16,6 +16,7 @@ body {
 .space8 { margin-top: 8%; }
 .space10 { margin-top: 10%; }
 .full-width { width: 100%; }
+.no-show { display: none; height: 0; width: 0; }
 
 .col-20 { width: 20%; }
 .col-60 { width: 60%; }
@@ -75,6 +76,36 @@ li.L5, li.L6, li.L7, li.L8
 
 #logo:hover .bolt {
 	color: yellow;
+}
+
+.utility-icons {
+	text-align: center;
+	font-size:1em;
+	margin-bottom: 5%;
+}
+
+.utility-icons span {
+	display: inline-block;
+	margin: -1%;
+	width: 50%;
+	text-align: center;
+	background: #C23B22;
+	padding: 3%;
+	border-radius: 0.3em;
+	border: 2px solid #812322;
+}
+
+.utility-icons i {
+	display: block;
+	font-size: 4em !important;
+	margin:3%;
+	position: relative;
+	cursor: pointer;
+}
+
+.utility-icons span:hover {
+	color: yellow;
+	background: #361412;
 }
 
 .menu-items ul {
