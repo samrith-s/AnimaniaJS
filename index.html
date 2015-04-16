@@ -45,12 +45,12 @@
 				<div class='row menu-items'>
 					<div class='col-md-12'>
 						<ul>
-							<a class='menu-item-link' href='#welcome'><li><i class="fa fa-sign-in"></i> Welcome</li></a>
-							<a class='menu-item-link' href='#start'><li><i class="fa fa-cog"></i> Getting Started</li></a>
-							<a class='menu-item-link' href='#animations'><li><i class="fa fa-magic"></i> Animations</li></a>
-							<a class='menu-item-link' href='#animation-puff'><li><i class="fa fa-expand"></i> Puff Animation</li></a>
-							<a class='menu-item-link' href='#animation-float'><li><i class="fa fa-ship"></i> Float Animation</li></a>
-							<a class='menu-item-link' href='#animation-credits'><li><i class="fa fa-bars"></i> Credits Animation</li></a>
+							<li id='welcome_'><i class="fa fa-sign-in"></i> Welcome</li></a>
+							<li id='getting-started_'><i class="fa fa-cog"></i> Getting Started</li></a>
+							<li id='anims_'><i class="fa fa-magic"></i> Animations</li></a>
+							<li id='puffanim_' class='submenu'><i class="fa fa-expand"></i> Puff Animation</li></a>
+							<li id='floatanim_' class='submenu'><i class="fa fa-ship"></i> Float Animation</li></a>
+							<li id='creditsanim_' class='submenu'><i class="fa fa-bars"></i> Credits Animation</li></a>
 						</ul>
 					</div>
 				</div>
@@ -61,14 +61,14 @@
 						
 						<!--------------- WELCOME ------------------------>
 						
-						<h1 class='title'><a name='welcome'>Welcome!</a></h1>
+						<h1 class='title' id='welcome'>Welcome!</h1>
 							<p>
 								AnimaniaJS is an open-source jQuery plugin, which makes 3 simple animations, namely: <b>float</b>, <b>puff</b> and <b>credits</b> animations simpler. The main aim of the plugin is to ease the handling of often complex jQuery.animate() calls and provide customization options to the user.
 							</p>
 						
 						<!--------------- GETTING STARTED ------------------------>
 						
-						<h1 class='title'><a name='start'>Getting started</a></h1>
+						<h1 class='title' id='getting-started'>Getting started</h1>
 							<p>
 								You can get cracking with AnimaniaJS by including the following two lines inside the <code>&lt;head&gt;</code> tag or at the end of your body content.
 							</p>
@@ -101,7 +101,7 @@
 						
 						<!--------------- GETTING STARTED ------------------------>
 						
-						<h1 class='title'><a name='animations'>Animations</a></h1>
+						<h1 class='title' id='anims'>Animations</h1>
 						<p>
 							Animations using AnimaniaJS are very, very easy to use. It requires just a basic understanding of JavaScript. Best part? It has a variety of customization options, and more keep on getting added with each update!
 						</p>
@@ -133,7 +133,7 @@
 							</tr>
 						</table>
 						
-						<h2 class='subtitle'>Puff</h2>
+						<h2 id='puffanim' class='subtitle'>Puff</h2>
 						<p>
 							The puff animation is a simple animation with both entry and exit transitions. It automatically toggles display state of the object and readies it for the respective transition. Below is a basic example of a puff animation.
 						</p>
@@ -191,7 +191,7 @@ $("#myDiv").animania("puff", {
 -->
 						</table>
 						
-						<h2 class='subtitle'>Float</h2>
+						<h2 id='floatanim' class='subtitle'>Float</h2>
 						<p>
 							The float animation is a brilliant animation with both entry and exit transitions as well as directions: up, down, left and right. It automatically toggles display state of the object and readies it for the respective transition and direction. Below is a basic example of a float animation.
 						</p>
@@ -255,7 +255,7 @@ $("#myDiv").animania("float", {
 						</table>
 						
 						
-						<h2 class='subtitle'>Credits</h2>
+						<h2 id='creditsanim' class='subtitle'>Credits</h2>
 						<p>
 							The credits animation simply marquees the object either up or down. It also has built in support for animation pausing and slow drag on restart, which is toggled on <code>mouseover</code> and <code>mouseout</code> It automatically toggles display state of the object and readies it for the respective transition. Below is a basic example of a credits animation.
 						</p>

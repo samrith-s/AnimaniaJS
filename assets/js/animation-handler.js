@@ -1,4 +1,6 @@
 
+var topPos;
+
 $(function() {
 	if($(".puffanimselect").val()==="entry")
 		$("#puffanimdiv").fadeOut();
@@ -25,6 +27,8 @@ $(function() {
 	});
 	
 	$("#creditsanimdiv").hide();
+	
+	globalObservers();
 });
 
 function execPuffAnim() {
@@ -55,5 +59,55 @@ function execCreditsAnim() {
 			direction: $(".creditsanimselect").val(),
 			offset: 100
 		}
+	});
+}
+
+function globalObservers() {
+	
+	topPos = [
+		$("#welcome").offset().top,
+		$("#getting-started").offset().top,
+		$("#anims").offset().top,
+		$("#puffanim").offset().top,
+		$("#floatanim").offset().top,
+		$("#creditsanim").offset().top
+	]
+	
+	console.log(topPos);
+	
+	$("#welcome_").unbind('click').on('click', function() {
+		$(".main-wrapper").animate({
+			scrollTop: topPos[0]
+		}, 650);
+	});
+	
+	$("#getting-started_").unbind('click').on('click', function() {
+		$(".main-wrapper").animate({
+			scrollTop: topPos[1]
+		}, 650);
+	});
+	
+	$("#anims_").unbind('click').on('click', function() {
+		$(".main-wrapper").animate({
+			scrollTop: topPos[2]
+		}, 650);
+	});
+	
+	$("#puffanim_").unbind('click').on('click', function() {
+		$(".main-wrapper").animate({
+			scrollTop: topPos[3]
+		}, 650);
+	});
+	
+	$("#floatanim_").unbind('click').on('click', function() {
+		$(".main-wrapper").animate({
+			scrollTop: topPos[4] - 25
+		}, 650);
+	});
+	
+	$("#creditsanim_").unbind('click').on('click', function() {
+		$(".main-wrapper").animate({
+			scrollTop: topPos[5] - 35
+		}, 650);
 	});
 }
